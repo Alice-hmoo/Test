@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Heart for You - Valentine's Day</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #2c003e 0%, #6a11cb 50%, #2575fc 100%);
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 2rem;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .active-page {
+            display: flex;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 50, 150, 0.7);
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffebee;
+        }
+        
+        .photo-container {
+            width: 80%;
+            max-width: 500px;
+            height: 400px;
+            margin: 2rem auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            border: 8px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .page-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .page-photo:hover {
+            transform: scale(1.05);
+        }
+        
+        .question {
+            font-size: 1.8rem;
+            margin: 2rem 0;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            max-width: 800px;
+        }
+        
+        .yes-button {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.8rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 1rem;
+            box-shadow: 0 5px 15px rgba(255, 65, 108, 0.4);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .yes-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 65, 108, 0.6);
+        }
+        
+        .yes-button:active {
+            transform: translateY(0);
+        }
+        
+        .yes-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .yes-button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(40, 40);
+                opacity: 0;
+            }
+        }
+        
+        .letter-container {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin: 2rem auto;
+            text-align: left;
+            backdrop-filter: blur(5px);
+            line-height: 1.8;
+            font-size: 1.3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .letter-container p {
+            margin-bottom: 1.5rem;
+            text-indent: 1.5rem;
+        }
+        
+        .signature {
+            text-align: right;
+            font-style: italic;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            color: #ffccd5;
+        }
+        
+        .heart-shapes {
+            position: absolute;
+            bottom: 150px;
+            width: 100%;
+            height: 200px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .heart {
+            position: absolute;
+            bottom: 0;
+            background-color: #ff4081;
+            display: inline-block;
+            height: 30px;
+            margin: 0 10px;
+            position: relative;
+            top: 0;
+            transform: rotate(-45deg);
+            width: 30px;
+            animation: floatUp 8s ease-in infinite;
+            filter: drop-shadow(0 0 5px rgba(255, 64, 129, 0.7));
+        }
+        
+        .heart:before,
+        .heart:after {
+            content: "";
+            background-color: #ff4081;
+            border-radius: 50%;
+            height: 30px;
+            position: absolute;
+            width: 30px;
+        }
+        
+        .heart:before {
+            top: -15px;
+            left: 0;
+        }
+        
+        .heart:after {
+            left: 15px;
+            top: 0;
+        }
+        
+        .heart:nth-child(2n) {
+            background-color: #ff79b0;
+            animation-delay: 1s;
+            width: 25px;
+            height: 25px;
+        }
+        
+        .heart:nth-child(2n):before,
+        .heart:nth-child(2n):after {
+            background-color: #ff79b0;
+            height: 25px;
+            width: 25px;
+        }
+        
+        .heart:nth-child(3n) {
+            background-color: #ffabdb;
+            animation-delay: 2s;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .heart:nth-child(3n):before,
+        .heart:nth-child(3n):after {
+            background-color: #ffabdb;
+            height: 20px;
+            width: 20px;
+        }
+        
+        .heart:nth-child(4n) {
+            background-color: #ff6ec7;
+            animation-delay: 3s;
+            width: 35px;
+            height: 35px;
+        }
+        
+        .heart:nth-child(4n):before,
+        .heart:nth-child(4n):after {
+            background-color: #ff6ec7;
+            height: 35px;
+            width: 35px;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: rotate(-45deg) translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: rotate(-45deg) translateY(-100vh) scale(0.5);
+                opacity: 0;
+            }
+        }
+        
+        /* Fireworks */
+        .fireworks-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px;
+        }
+        
+        .thank-you {
+            margin-top: 3rem;
+            font-size: 1.8rem;
+            color: #ffccd5;
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .audio-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .audio-controls button {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .audio-controls button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .page-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            z-index: 100;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .photo-container {
+                width: 95%;
+                height: 300px;
+            }
+            
+            .question {
+                font-size: 1.5rem;
+                padding: 1rem;
+            }
+            
+            .letter-container {
+                padding: 1.5rem;
+                font-size: 1.1rem;
+            }
+            
+            .yes-button {
+                padding: 1rem 2rem;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1 -->
+    <div class="page active-page" id="page1">
+        <h1>My Heart Found You</h1>
+        <div class="photo-container">
+            <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Romantic couple silhouette at sunset" class="page-photo">
+        </div>
+        <div class="question">
+            From the moment I saw you, my world changed forever. Will you journey with me to the next page of our story?
+        </div>
+        <button class="yes-button" onclick="goToPage(2)">
+            Yes, My Heart Chooses You <i class="fas fa-heart" style="margin-left: 10px;"></i>
+        </button>
+    </div>
+    
+    <!-- Page 2 -->
+    <div class="page" id="page2">
+        <h1>Every Moment With You</h1>
+        <div class="photo-container">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="Woman with flowers looking at camera" class="page-photo">
+        </div>
+        <div class="question">
+            With each passing day, my love for you grows stronger. Will you continue to the final page where my heart speaks?
+        </div>
+        <button class="yes-button" onclick="goToPage(3)">
+            Yes, I Want to Hear Your Heart <i class="fas fa-heartbeat" style="margin-left: 10px;"></i>
+        </button>
+    </div>
+    
+    <!-- Page 3 -->
+    <div class="page" id="page3">
+        <h1>My Love Letter to You</h1>
+        <div class="photo-container">
+            <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Romantic couple holding hands" class="page-photo">
+        </div>
+        
+        <!-- Heart shapes that float up -->
+        <div class="heart-shapes" id="heartContainer"></div>
+        
+        <div class="letter-container">
+            <p>My Dearest Love,</p>
+            
+            <p>From the moment our paths crossed, I knew my life would never be the same. You came into my world like a gentle breeze on a warm summer day, refreshing my soul and awakening parts of me I never knew existed.</p>
+            
+            <p>I love the way your eyes light up when you talk about things you're passionate about. I love the sound of your laughter, which has become my favorite melody. I love the way you make ordinary moments feel extraordinary just by being there.</p>
+            
+            <p>With you, I've discovered a love so deep it sometimes takes my breath away. It's in the quiet moments we share, the comfort of your presence, and the way you understand me without words. You've seen me at my best and my worst, and yet you choose to stay, to love me through it all.</p>
+            
+            <p>You are my safe harbor in life's storms, my sunshine on cloudy days, and the missing piece I never knew I was searching for. Every day with you is a gift I cherish, and every night dreaming of you is a blessing.</p>
+            
+            <p>No matter what the future holds, I want to face it with you by my side. Through joy and sorrow, through laughter and tears, I choose you today, tomorrow, and forever.</p>
+            
+            <p>You have my heart completely, unconditionally, and eternally.</p>
+            
+            <div class="signature">
+                With all my love, forever yours<br>
+                <span style="font-size: 2rem;">♥</span>
+            </div>
+        </div>
+        
+        <div class="thank-you">
+            Thank you for loving me, supporting me, being beside me always
+        </div>
+    </div>
+    
+    <!-- Fireworks container -->
+    <div class="fireworks-container" id="fireworksContainer"></div>
+    
+    <!-- Audio controls -->
+    <div class="audio-controls">
+        <button id="muteButton">
+            <i class="fas fa-volume-up"></i>
+        </button>
+        <button id="replayButton">
+            <i class="fas fa-redo"></i>
+        </button>
+    </div>
+    
+    <!-- Page counter -->
+    <div class="page-counter">
+        Page <span id="currentPage">1</span> of 3
+    </div>
+    
+    <!-- Background music -->
+    <audio id="bgMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-sunset-687.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- Fireworks sound for page 3 -->
+    <audio id="fireworksSound" loop>
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-fireworks-show-audio-3061.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+        // Page navigation
+        let currentPage = 1;
+        
+        function goToPage(pageNumber) {
+            // Hide current page
+            document.getElementById(`page${currentPage}`).classList.remove('active-page');
+            
+            // Show new page
+            currentPage = pageNumber;
+            document.getElementById(`page${currentPage}`).classList.add('active-page');
+            document.getElementById('currentPage').textContent = currentPage;
+            
+            // Handle audio based on page
+            handlePageAudio();
+            
+            // Initialize page-specific effects
+            if (pageNumber === 3) {
+                initHearts();
+                initFireworks();
+                // Switch to fireworks sound
+                document.getElementById('bgMusic').pause();
+                document.getElementById('fireworksSound').play().catch(e => console.log("Autoplay prevented:", e));
+            } else if (pageNumber === 1 || pageNumber === 2) {
+                // Switch back to romantic music
+                document.getElementById('fireworksSound').pause();
+                document.getElementById('bgMusic').play().catch(e => console.log("Autoplay prevented:", e));
+            }
+        }
+        
+        // Initialize hearts for page 3
+        function initHearts() {
+            const heartContainer = document.getElementById('heartContainer');
+            heartContainer.innerHTML = '';
+            
+            // Create 20 floating hearts
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                
+                // Random position
+                const left = Math.random() * 100;
+                heart.style.left = `${left}%`;
+                
+                // Random animation delay and duration
+                const delay = Math.random() * 5;
+                const duration = 5 + Math.random() * 5;
+                heart.style.animationDelay = `${delay}s`;
+                heart.style.animationDuration = `${duration}s`;
+                
+                heartContainer.appendChild(heart);
+            }
+        }
+        
+        // Initialize fireworks for page 3
+        function initFireworks() {
+            const container = document.getElementById('fireworksContainer');
+            container.innerHTML = '';
+            
+            // Create different types of fireworks
+            const fireworkTypes = [
+                {color: '#ff4081', shape: 'heart'}, // Pink hearts
+                {color: '#ffeb3b', shape: 'star'}, // Yellow stars
+                {color: '#03a9f4', shape: 'circle'}, // Blue circles
+                {color: '#4caf50', shape: 'ring'}, // Green rings
+                {color: '#ff9800', shape: 'peony'}, // Orange peony
+                {color: '#9c27b0', shape: 'willow'}, // Purple willow
+                {color: '#ff5722', shape: 'brocade'}, // Red-orange brocade
+                {color: '#00bcd4', shape: 'pearl'}, // Cyan pearls
+                {color: '#8bc34a', shape: 'bee'}, // Light green bees
+                {color: '#ffffff', shape: 'strobe'} // White strobe
+            ];
+            
+            // Create multiple fireworks
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    createFirework(fireworkTypes[i % fireworkTypes.length]);
+                }, i * 300);
+            }
+            
+            // Continue creating fireworks periodically
+            setInterval(() => {
+                const randomType = fireworkTypes[Math.floor(Math.random() * fireworkTypes.length)];
+                createFirework(randomType);
+            }, 800);
+        }
+        
+        function createFirework(type) {
+            const container = document.getElementById('fireworksContainer');
+            const firework = document.createElement('div');
+            firework.classList.add('firework');
+            
+            // Set color based on type
+            firework.style.backgroundColor = type.color;
+            firework.style.boxShadow = `0 0 10px 2px ${type.color}`;
+            
+            // Random position
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            firework.style.left = `${left}%`;
+            firework.style.top = `${top}%`;
+            
+            // Different animation based on shape
+            let animationName = 'explode';
+            if (type.shape === 'heart') {
+                animationName = 'heartExplode';
+            } else if (type.shape === 'star') {
+                animationName = 'starExplode';
+            } else if (type.shape === 'ring') {
+                animationName = 'ringExplode';
+            }
+            
+            // Apply animation
+            firework.style.animation = `${animationName} 1.5s ease-out forwards`;
+            
+            container.appendChild(firework);
+            
+            // Remove firework after animation completes
+            setTimeout(() => {
+                if (firework.parentNode === container) {
+                    container.removeChild(firework);
+                }
+            }, 1500);
+        }
+        
+        // Handle audio based on page
+        function handlePageAudio() {
+            const bgMusic = document.getElementById('bgMusic');
+            const fireworksSound = document.getElementById('fireworksSound');
+            
+            if (currentPage === 3) {
+                // Page 3: fireworks sound
+                bgMusic.pause();
+                fireworksSound.volume = 0.7;
+                fireworksSound.play().catch(e => console.log("Autoplay prevented:", e));
+            } else {
+                // Pages 1 and 2: romantic music
+                fireworksSound.pause();
+                bgMusic.volume = 0.5;
+                bgMusic.play().catch(e => console.log("Autoplay prevented:", e));
+            }
+        }
+        
+        // Audio controls
+        document.getElementById('muteButton').addEventListener('click', function() {
+            const bgMusic = document.getElementById('bgMusic');
+            const fireworksSound = document.getElementById('fireworksSound');
+            const icon = this.querySelector('i');
+            
+            if (bgMusic.muted && fireworksSound.muted) {
+                bgMusic.muted = false;
+                fireworksSound.muted = false;
+                icon.classList.remove('fa-volume-mute');
+                icon.classList.add('fa-volume-up');
+            } else {
+                bgMusic.muted = true;
+                fireworksSound.muted = true;
+                icon.classList.remove('fa-volume-up');
+                icon.classList.add('fa-volume-mute');
+            }
+        });
+        
+        document.getElementById('replayButton').addEventListener('click', function() {
+            const bgMusic = document.getElementById('bgMusic');
+            const fireworksSound = document.getElementById('fireworksSound');
+            
+            bgMusic.currentTime = 0;
+            fireworksSound.currentTime = 0;
+            
+            if (currentPage === 3) {
+                fireworksSound.play().catch(e => console.log("Autoplay prevented:", e));
+            } else {
+                bgMusic.play().catch(e => console.log("Autoplay prevented:", e));
+            }
+        });
+        
+        // Auto-start background music on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            // Try to play background music
+            document.getElementById('bgMusic').volume = 0.5;
+            document.getElementById('bgMusic').play().catch(e => {
+                console.log("Autoplay prevented. User interaction required.");
+                // Show a notification for user to interact
+                document.body.addEventListener('click', function initAudio() {
+                    document.getElementById('bgMusic').play().catch(e => console.log("Still prevented"));
+                    document.body.removeEventListener('click', initAudio);
+                });
+            });
+            
+            // Preload fireworks sound
+            document.getElementById('fireworksSound').volume = 0.7;
+            
+            // Initialize page counter
+            document.getElementById('currentPage').textContent = currentPage;
+        });
+        
+        // Add CSS for firework animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes explode {
+                0% { transform: scale(1); opacity: 1; }
+                50% { transform: scale(3); opacity: 0.7; }
+                100% { transform: scale(5); opacity: 0; }
+            }
+            
+            @keyframes heartExplode {
+                0% { transform: scale(1) rotate(-45deg); opacity: 1; }
+                50% { transform: scale(4) rotate(-45deg); opacity: 0.7; }
+                100% { transform: scale(8) rotate(-45deg); opacity: 0; }
+            }
+            
+            @keyframes starExplode {
+                0% { transform: scale(1); opacity: 1; }
+                50% { transform: scale(3) rotate(180deg); opacity: 0.7; }
+                100% { transform: scale(6) rotate(360deg); opacity: 0; }
+            }
+            
+            @keyframes ringExplode {
+                0% { transform: scale(1); box-shadow: 0 0 10px 2px; opacity: 1; }
+                50% { transform: scale(3); box-shadow: 0 0 20px 5px; opacity: 0.7; }
+                100% { transform: scale(5); box-shadow: 0 0 30px 10px; opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
