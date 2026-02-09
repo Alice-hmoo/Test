@@ -15,8 +15,8 @@
         
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #2c003e 0%, #6a11cb 50%, #2575fc 100%);
-            color: white;
+            background: linear-gradient(135deg, #ffafcc 0%, #ffc8dd 50%, #ffafcc 100%);
+            color: #590d22;
             overflow-x: hidden;
             position: relative;
         }
@@ -40,8 +40,8 @@
         h1 {
             font-size: 3.5rem;
             margin-bottom: 1.5rem;
-            text-shadow: 0 0 10px rgba(255, 50, 150, 0.7);
-            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            background: linear-gradient(to right, #9d174d, #be185d);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -50,19 +50,23 @@
         h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: #ffebee;
+            color: #7c193c;
         }
         
         .photo-container {
-            width: 80%;
+            width: 90%;
             max-width: 500px;
             height: 400px;
             margin: 2rem auto;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 15px 35px rgba(137, 18, 66, 0.2);
             position: relative;
-            border: 8px solid rgba(255, 255, 255, 0.1);
+            border: 10px solid rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .page-photo {
@@ -72,38 +76,57 @@
             transition: transform 0.5s;
         }
         
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            color: #7c193c;
+            font-size: 1.2rem;
+            padding: 2rem;
+        }
+        
         .page-photo:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
         
         .question {
             font-size: 1.8rem;
             margin: 2rem 0;
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
+            padding: 1.5rem 2rem;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
             max-width: 800px;
+            color: #590d22;
+            box-shadow: 0 8px 20px rgba(137, 18, 66, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.4);
         }
         
         .yes-button {
-            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            background: linear-gradient(to right, #e11d48, #be123c);
             color: white;
             border: none;
-            padding: 1.2rem 3rem;
+            padding: 1.3rem 3.5rem;
             font-size: 1.8rem;
             border-radius: 50px;
             cursor: pointer;
             margin-top: 1rem;
-            box-shadow: 0 5px 15px rgba(255, 65, 108, 0.4);
+            box-shadow: 0 10px 25px rgba(190, 18, 60, 0.4);
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
         
         .yes-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(255, 65, 108, 0.6);
+            box-shadow: 0 15px 30px rgba(190, 18, 60, 0.6);
+            background: linear-gradient(to right, #f43f5e, #e11d48);
         }
         
         .yes-button:active {
@@ -141,15 +164,17 @@
         
         .letter-container {
             max-width: 800px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
             padding: 2.5rem;
-            border-radius: 20px;
+            border-radius: 25px;
             margin: 2rem auto;
             text-align: left;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
             line-height: 1.8;
             font-size: 1.3rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 35px rgba(137, 18, 66, 0.15);
+            color: #590d22;
+            border: 2px solid rgba(255, 255, 255, 0.4);
         }
         
         .letter-container p {
@@ -162,7 +187,8 @@
             font-style: italic;
             font-size: 1.5rem;
             margin-top: 2rem;
-            color: #ffccd5;
+            color: #9d174d;
+            font-weight: 600;
         }
         
         .heart-shapes {
@@ -177,7 +203,7 @@
         .heart {
             position: absolute;
             bottom: 0;
-            background-color: #ff4081;
+            background-color: #ff4d8d;
             display: inline-block;
             height: 30px;
             margin: 0 10px;
@@ -186,13 +212,13 @@
             transform: rotate(-45deg);
             width: 30px;
             animation: floatUp 8s ease-in infinite;
-            filter: drop-shadow(0 0 5px rgba(255, 64, 129, 0.7));
+            filter: drop-shadow(0 0 8px rgba(255, 77, 141, 0.7));
         }
         
         .heart:before,
         .heart:after {
             content: "";
-            background-color: #ff4081;
+            background-color: #ff4d8d;
             border-radius: 50%;
             height: 30px;
             position: absolute;
@@ -210,7 +236,7 @@
         }
         
         .heart:nth-child(2n) {
-            background-color: #ff79b0;
+            background-color: #ff85b1;
             animation-delay: 1s;
             width: 25px;
             height: 25px;
@@ -218,13 +244,13 @@
         
         .heart:nth-child(2n):before,
         .heart:nth-child(2n):after {
-            background-color: #ff79b0;
+            background-color: #ff85b1;
             height: 25px;
             width: 25px;
         }
         
         .heart:nth-child(3n) {
-            background-color: #ffabdb;
+            background-color: #ffb3d1;
             animation-delay: 2s;
             width: 20px;
             height: 20px;
@@ -232,13 +258,13 @@
         
         .heart:nth-child(3n):before,
         .heart:nth-child(3n):after {
-            background-color: #ffabdb;
+            background-color: #ffb3d1;
             height: 20px;
             width: 20px;
         }
         
         .heart:nth-child(4n) {
-            background-color: #ff6ec7;
+            background-color: #ff4d8d;
             animation-delay: 3s;
             width: 35px;
             height: 35px;
@@ -246,7 +272,7 @@
         
         .heart:nth-child(4n):before,
         .heart:nth-child(4n):after {
-            background-color: #ff6ec7;
+            background-color: #ff4d8d;
             height: 35px;
             width: 35px;
         }
@@ -275,8 +301,6 @@
         
         .firework {
             position: absolute;
-            width: 5px;
-            height: 5px;
             border-radius: 50%;
             box-shadow: 0 0 10px 2px;
         }
@@ -284,14 +308,17 @@
         .thank-you {
             margin-top: 3rem;
             font-size: 1.8rem;
-            color: #ffccd5;
+            color: #9d174d;
             text-align: center;
             padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(137, 18, 66, 0.1);
         }
         
         .audio-controls {
@@ -299,41 +326,86 @@
             bottom: 20px;
             right: 20px;
             z-index: 100;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 15px;
             border-radius: 50px;
             display: flex;
             align-items: center;
             gap: 10px;
+            box-shadow: 0 5px 15px rgba(137, 18, 66, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.9);
         }
         
         .audio-controls button {
             background: transparent;
             border: none;
-            color: white;
+            color: #9d174d;
             font-size: 1.5rem;
             cursor: pointer;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.3s;
         }
         
         .audio-controls button:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(157, 23, 77, 0.1);
+            transform: scale(1.1);
+        }
+        
+        .file-input-container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(137, 18, 66, 0.1);
+            border: 2px dashed #ff85b1;
+            max-width: 500px;
+        }
+        
+        .file-input-container label {
+            display: block;
+            margin-bottom: 10px;
+            color: #7c193c;
+            font-weight: 600;
+        }
+        
+        .file-input {
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #ff85b1;
+            width: 100%;
+            background: white;
+            color: #590d22;
         }
         
         .page-counter {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.8);
             padding: 10px 20px;
             border-radius: 30px;
             font-size: 1.2rem;
             z-index: 100;
+            color: #7c193c;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(137, 18, 66, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+        }
+        
+        .instruction {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 20px;
+            max-width: 800px;
+            color: #7c193c;
+            box-shadow: 0 5px 15px rgba(137, 18, 66, 0.1);
+            border: 2px solid #ffb3d1;
         }
         
         @media (max-width: 768px) {
@@ -361,50 +433,140 @@
             }
             
             .yes-button {
-                padding: 1rem 2rem;
-                font-size: 1.5rem;
+                padding: 1rem 2.5rem;
+                font-size: 1.6rem;
             }
+            
+            .audio-controls {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 12px;
+            }
+        }
+        
+        /* Custom animations for TikTok-like feel */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        /* Custom firework animations */
+        @keyframes heartExplode {
+            0% { transform: scale(1) rotate(-45deg); opacity: 1; }
+            50% { transform: scale(4) rotate(-45deg); opacity: 0.7; }
+            100% { transform: scale(8) rotate(-45deg); opacity: 0; }
+        }
+        
+        @keyframes starExplode {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(3) rotate(180deg); opacity: 0.7; }
+            100% { transform: scale(6) rotate(360deg); opacity: 0; }
+        }
+        
+        @keyframes circleExplode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(5); opacity: 0; }
+        }
+        
+        @keyframes ringExplode {
+            0% { transform: scale(1); box-shadow: 0 0 10px 2px; opacity: 1; }
+            50% { transform: scale(3); box-shadow: 0 0 20px 5px; opacity: 0.7; }
+            100% { transform: scale(5); box-shadow: 0 0 30px 10px; opacity: 0; }
         }
     </style>
 </head>
 <body>
     <!-- Page 1 -->
-    <div class="page active-page" id="page1">
+    <div class="page active-page fade-in" id="page1">
         <h1>My Heart Found You</h1>
+        
         <div class="photo-container">
-            <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Romantic couple silhouette at sunset" class="page-photo">
+            <!-- You can replace this with your own photo -->
+            <div class="photo-placeholder" id="photo1-placeholder">
+                <i class="fas fa-heart" style="font-size: 4rem; margin-bottom: 1rem; color: #ff4d8d;"></i>
+                <p>Your Photo Will Appear Here</p>
+                <p>Upload a photo using the button below</p>
+            </div>
+            <img id="photo1" class="page-photo" style="display: none;" alt="Your romantic photo">
         </div>
+        
+        <div class="file-input-container">
+            <label for="photo1-upload"><i class="fas fa-camera"></i> Upload Photo for Page 1</label>
+            <input type="file" id="photo1-upload" class="file-input" accept="image/*">
+        </div>
+        
         <div class="question">
             From the moment I saw you, my world changed forever. Will you journey with me to the next page of our story?
         </div>
+        
         <button class="yes-button" onclick="goToPage(2)">
             Yes, My Heart Chooses You <i class="fas fa-heart" style="margin-left: 10px;"></i>
         </button>
+        
+        <div class="instruction">
+            <p><i class="fas fa-music"></i> <strong>Music Setup:</strong> Upload your background music for Page 1 using the audio controls in the bottom right corner.</p>
+        </div>
     </div>
     
     <!-- Page 2 -->
-    <div class="page" id="page2">
+    <div class="page fade-in" id="page2">
         <h1>Every Moment With You</h1>
+        
         <div class="photo-container">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="Woman with flowers looking at camera" class="page-photo">
+            <!-- You can replace this with your own photo -->
+            <div class="photo-placeholder" id="photo2-placeholder">
+                <i class="fas fa-image" style="font-size: 4rem; margin-bottom: 1rem; color: #ff4d8d;"></i>
+                <p>Your Photo Will Appear Here</p>
+                <p>Upload a photo using the button below</p>
+            </div>
+            <img id="photo2" class="page-photo" style="display: none;" alt="Your romantic photo">
         </div>
+        
+        <div class="file-input-container">
+            <label for="photo2-upload"><i class="fas fa-camera"></i> Upload Photo for Page 2</label>
+            <input type="file" id="photo2-upload" class="file-input" accept="image/*">
+        </div>
+        
         <div class="question">
             With each passing day, my love for you grows stronger. Will you continue to the final page where my heart speaks?
         </div>
+        
         <button class="yes-button" onclick="goToPage(3)">
             Yes, I Want to Hear Your Heart <i class="fas fa-heartbeat" style="margin-left: 10px;"></i>
         </button>
     </div>
     
     <!-- Page 3 -->
-    <div class="page" id="page3">
+    <div class="page fade-in" id="page3">
         <h1>My Love Letter to You</h1>
+        
         <div class="photo-container">
-            <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Romantic couple holding hands" class="page-photo">
+            <!-- You can replace this with your own photo -->
+            <div class="photo-placeholder" id="photo3-placeholder">
+                <i class="fas fa-heart" style="font-size: 4rem; margin-bottom: 1rem; color: #ff4d8d;"></i>
+                <p>Your Photo Will Appear Here</p>
+                <p>Upload a photo using the button below</p>
+            </div>
+            <img id="photo3" class="page-photo" style="display: none;" alt="Your romantic photo">
         </div>
         
         <!-- Heart shapes that float up -->
         <div class="heart-shapes" id="heartContainer"></div>
+        
+        <div class="file-input-container">
+            <label for="photo3-upload"><i class="fas fa-camera"></i> Upload Photo for Page 3</label>
+            <input type="file" id="photo3-upload" class="file-input" accept="image/*">
+        </div>
         
         <div class="letter-container">
             <p>My Dearest Love,</p>
@@ -423,7 +585,7 @@
             
             <div class="signature">
                 With all my love, forever yours<br>
-                <span style="font-size: 2rem;">♥</span>
+                <span style="font-size: 2rem; color: #ff4d8d;">♥</span>
             </div>
         </div>
         
@@ -437,12 +599,27 @@
     
     <!-- Audio controls -->
     <div class="audio-controls">
-        <button id="muteButton">
+        <div style="margin-right: 10px; font-weight: 600; color: #7c193c;">
+            <i class="fas fa-music"></i> Music
+        </div>
+        <button id="muteButton" title="Mute/Unmute">
             <i class="fas fa-volume-up"></i>
         </button>
-        <button id="replayButton">
+        <button id="replayButton" title="Restart Music">
             <i class="fas fa-redo"></i>
         </button>
+        <div style="margin-left: 10px;">
+            <label for="musicUpload" title="Upload Your Music" style="cursor: pointer;">
+                <i class="fas fa-upload" style="color: #7c193c; font-size: 1.5rem;"></i>
+            </label>
+            <input type="file" id="musicUpload" accept="audio/*" style="display: none;">
+        </div>
+        <div style="margin-left: 5px;">
+            <label for="fireworksMusicUpload" title="Upload Fireworks Sound" style="cursor: pointer;">
+                <i class="fas fa-fire" style="color: #7c193c; font-size: 1.5rem;"></i>
+            </label>
+            <input type="file" id="fireworksMusicUpload" accept="audio/*" style="display: none;">
+        </div>
     </div>
     
     <!-- Page counter -->
@@ -452,12 +629,16 @@
     
     <!-- Background music -->
     <audio id="bgMusic" loop>
+        <!-- Default music - replace with your own -->
         <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-sunset-687.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
     </audio>
     
     <!-- Fireworks sound for page 3 -->
     <audio id="fireworksSound" loop>
+        <!-- Default fireworks sound - replace with your own -->
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-fireworks-show-audio-3061.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
     </audio>
     
     <script>
@@ -473,6 +654,9 @@
             document.getElementById(`page${currentPage}`).classList.add('active-page');
             document.getElementById('currentPage').textContent = currentPage;
             
+            // Add fade-in animation
+            document.getElementById(`page${currentPage}`).classList.add('fade-in');
+            
             // Handle audio based on page
             handlePageAudio();
             
@@ -482,11 +666,17 @@
                 initFireworks();
                 // Switch to fireworks sound
                 document.getElementById('bgMusic').pause();
-                document.getElementById('fireworksSound').play().catch(e => console.log("Autoplay prevented:", e));
+                // Try to play fireworks sound, but don't show error if autoplay is blocked
+                document.getElementById('fireworksSound').play().catch(e => {
+                    console.log("Fireworks sound autoplay prevented. User interaction required.");
+                });
             } else if (pageNumber === 1 || pageNumber === 2) {
                 // Switch back to romantic music
                 document.getElementById('fireworksSound').pause();
-                document.getElementById('bgMusic').play().catch(e => console.log("Autoplay prevented:", e));
+                // Try to play romantic music
+                document.getElementById('bgMusic').play().catch(e => {
+                    console.log("Music autoplay prevented. User interaction required.");
+                });
             }
         }
         
@@ -495,8 +685,8 @@
             const heartContainer = document.getElementById('heartContainer');
             heartContainer.innerHTML = '';
             
-            // Create 20 floating hearts
-            for (let i = 0; i < 20; i++) {
+            // Create 25 floating hearts
+            for (let i = 0; i < 25; i++) {
                 const heart = document.createElement('div');
                 heart.classList.add('heart');
                 
@@ -521,30 +711,30 @@
             
             // Create different types of fireworks
             const fireworkTypes = [
-                {color: '#ff4081', shape: 'heart'}, // Pink hearts
-                {color: '#ffeb3b', shape: 'star'}, // Yellow stars
-                {color: '#03a9f4', shape: 'circle'}, // Blue circles
-                {color: '#4caf50', shape: 'ring'}, // Green rings
-                {color: '#ff9800', shape: 'peony'}, // Orange peony
-                {color: '#9c27b0', shape: 'willow'}, // Purple willow
-                {color: '#ff5722', shape: 'brocade'}, // Red-orange brocade
-                {color: '#00bcd4', shape: 'pearl'}, // Cyan pearls
-                {color: '#8bc34a', shape: 'bee'}, // Light green bees
-                {color: '#ffffff', shape: 'strobe'} // White strobe
+                {color: '#ff4d8d', shape: 'heart', name: 'heartExplode'}, // Pink hearts
+                {color: '#ffb3d1', shape: 'heart', name: 'heartExplode'}, // Light pink hearts
+                {color: '#ff9ebb', shape: 'circle', name: 'circleExplode'}, // Medium pink circles
+                {color: '#ff6b9d', shape: 'ring', name: 'ringExplode'}, // Dark pink rings
+                {color: '#ffd1dc', shape: 'star', name: 'starExplode'}, // Very light pink stars
+                {color: '#ff85b1', shape: 'circle', name: 'circleExplode'}, // Light medium pink circles
+                {color: '#e11d48', shape: 'heart', name: 'heartExplode'}, // Red hearts
+                {color: '#be185d', shape: 'ring', name: 'ringExplode'}, // Dark red rings
+                {color: '#9d174d', shape: 'star', name: 'starExplode'}, // Dark pink stars
+                {color: '#ffffff', shape: 'circle', name: 'circleExplode'} // White circles for contrast
             ];
             
-            // Create multiple fireworks
-            for (let i = 0; i < 50; i++) {
+            // Create initial fireworks
+            for (let i = 0; i < 30; i++) {
                 setTimeout(() => {
                     createFirework(fireworkTypes[i % fireworkTypes.length]);
-                }, i * 300);
+                }, i * 200);
             }
             
             // Continue creating fireworks periodically
             setInterval(() => {
                 const randomType = fireworkTypes[Math.floor(Math.random() * fireworkTypes.length)];
                 createFirework(randomType);
-            }, 800);
+            }, 600);
         }
         
         function createFirework(type) {
@@ -562,18 +752,19 @@
             firework.style.left = `${left}%`;
             firework.style.top = `${top}%`;
             
-            // Different animation based on shape
-            let animationName = 'explode';
-            if (type.shape === 'heart') {
-                animationName = 'heartExplode';
-            } else if (type.shape === 'star') {
-                animationName = 'starExplode';
+            // Different size based on shape
+            let size = 5;
+            if (type.shape === 'heart' || type.shape === 'star') {
+                size = 6;
             } else if (type.shape === 'ring') {
-                animationName = 'ringExplode';
+                size = 8;
             }
             
+            firework.style.width = `${size}px`;
+            firework.style.height = `${size}px`;
+            
             // Apply animation
-            firework.style.animation = `${animationName} 1.5s ease-out forwards`;
+            firework.style.animation = `${type.name} 1.5s ease-out forwards`;
             
             container.appendChild(firework);
             
@@ -593,13 +784,11 @@
             if (currentPage === 3) {
                 // Page 3: fireworks sound
                 bgMusic.pause();
-                fireworksSound.volume = 0.7;
-                fireworksSound.play().catch(e => console.log("Autoplay prevented:", e));
+                fireworksSound.volume = 0.6;
             } else {
                 // Pages 1 and 2: romantic music
                 fireworksSound.pause();
                 bgMusic.volume = 0.5;
-                bgMusic.play().catch(e => console.log("Autoplay prevented:", e));
             }
         }
         
@@ -630,11 +819,89 @@
             fireworksSound.currentTime = 0;
             
             if (currentPage === 3) {
-                fireworksSound.play().catch(e => console.log("Autoplay prevented:", e));
+                fireworksSound.play().catch(e => console.log("Could not restart fireworks sound:", e));
             } else {
-                bgMusic.play().catch(e => console.log("Autoplay prevented:", e));
+                bgMusic.play().catch(e => console.log("Could not restart music:", e));
             }
         });
+        
+        // Upload music functionality
+        document.getElementById('musicUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const url = URL.createObjectURL(file);
+                const bgMusic = document.getElementById('bgMusic');
+                
+                // Replace the audio source
+                bgMusic.src = url;
+                bgMusic.load();
+                
+                // Try to play if we're on page 1 or 2
+                if (currentPage === 1 || currentPage === 2) {
+                    bgMusic.play().catch(e => {
+                        console.log("Music autoplay prevented. Click the play button or navigate to another page.");
+                    });
+                }
+                
+                alert("Romantic music uploaded successfully! It will play on pages 1 and 2.");
+            }
+        });
+        
+        // Upload fireworks sound functionality
+        document.getElementById('fireworksMusicUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const url = URL.createObjectURL(file);
+                const fireworksSound = document.getElementById('fireworksSound');
+                
+                // Replace the audio source
+                fireworksSound.src = url;
+                fireworksSound.load();
+                
+                // If we're on page 3, play it
+                if (currentPage === 3) {
+                    fireworksSound.play().catch(e => {
+                        console.log("Fireworks sound autoplay prevented.");
+                    });
+                }
+                
+                alert("Fireworks sound uploaded successfully! It will play on page 3.");
+            }
+        });
+        
+        // Photo upload functionality
+        document.getElementById('photo1-upload').addEventListener('change', function(e) {
+            handlePhotoUpload(e, 'photo1', 'photo1-placeholder');
+        });
+        
+        document.getElementById('photo2-upload').addEventListener('change', function(e) {
+            handlePhotoUpload(e, 'photo2', 'photo2-placeholder');
+        });
+        
+        document.getElementById('photo3-upload').addEventListener('change', function(e) {
+            handlePhotoUpload(e, 'photo3', 'photo3-placeholder');
+        });
+        
+        function handlePhotoUpload(event, photoId, placeholderId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const photoElement = document.getElementById(photoId);
+                    const placeholderElement = document.getElementById(placeholderId);
+                    
+                    // Set the photo source
+                    photoElement.src = e.target.result;
+                    photoElement.style.display = 'block';
+                    
+                    // Hide the placeholder
+                    placeholderElement.style.display = 'none';
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        }
         
         // Auto-start background music on page load
         window.addEventListener('DOMContentLoaded', function() {
@@ -650,40 +917,11 @@
             });
             
             // Preload fireworks sound
-            document.getElementById('fireworksSound').volume = 0.7;
+            document.getElementById('fireworksSound').volume = 0.6;
             
             // Initialize page counter
             document.getElementById('currentPage').textContent = currentPage;
         });
-        
-        // Add CSS for firework animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes explode {
-                0% { transform: scale(1); opacity: 1; }
-                50% { transform: scale(3); opacity: 0.7; }
-                100% { transform: scale(5); opacity: 0; }
-            }
-            
-            @keyframes heartExplode {
-                0% { transform: scale(1) rotate(-45deg); opacity: 1; }
-                50% { transform: scale(4) rotate(-45deg); opacity: 0.7; }
-                100% { transform: scale(8) rotate(-45deg); opacity: 0; }
-            }
-            
-            @keyframes starExplode {
-                0% { transform: scale(1); opacity: 1; }
-                50% { transform: scale(3) rotate(180deg); opacity: 0.7; }
-                100% { transform: scale(6) rotate(360deg); opacity: 0; }
-            }
-            
-            @keyframes ringExplode {
-                0% { transform: scale(1); box-shadow: 0 0 10px 2px; opacity: 1; }
-                50% { transform: scale(3); box-shadow: 0 0 20px 5px; opacity: 0.7; }
-                100% { transform: scale(5); box-shadow: 0 0 30px 10px; opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
