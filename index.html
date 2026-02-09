@@ -64,9 +64,6 @@
             position: relative;
             border: 10px solid rgba(255, 255, 255, 0.3);
             background-color: rgba(255, 255, 255, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         
         .page-photo {
@@ -74,19 +71,6 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
-        }
-        
-        .photo-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.2);
-            color: #7c193c;
-            font-size: 1.2rem;
-            padding: 2rem;
         }
         
         .page-photo:hover {
@@ -356,17 +340,18 @@
             transform: scale(1.1);
         }
         
-        .file-input-container {
-            background: rgba(255, 255, 255, 0.8);
+        .music-upload-container {
+            background: rgba(255, 255, 255, 0.9);
             padding: 15px;
             border-radius: 15px;
             margin: 15px 0;
             box-shadow: 0 5px 15px rgba(137, 18, 66, 0.1);
             border: 2px dashed #ff85b1;
             max-width: 500px;
+            text-align: left;
         }
         
-        .file-input-container label {
+        .music-upload-container label {
             display: block;
             margin-bottom: 10px;
             color: #7c193c;
@@ -397,15 +382,26 @@
             border: 2px solid rgba(255, 255, 255, 0.9);
         }
         
-        .instruction {
+        .instruction-box {
             background: rgba(255, 255, 255, 0.9);
             padding: 15px;
             border-radius: 15px;
-            margin-top: 20px;
+            margin: 20px 0;
             max-width: 800px;
             color: #7c193c;
             box-shadow: 0 5px 15px rgba(137, 18, 66, 0.1);
             border: 2px solid #ffb3d1;
+            text-align: left;
+        }
+        
+        .code-instruction {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: monospace;
+            color: #590d22;
+            border-left: 4px solid #ff4d8d;
         }
         
         @media (max-width: 768px) {
@@ -491,18 +487,9 @@
         <h1>My Heart Found You</h1>
         
         <div class="photo-container">
-            <!-- You can replace this with your own photo -->
-            <div class="photo-placeholder" id="photo1-placeholder">
-                <i class="fas fa-heart" style="font-size: 4rem; margin-bottom: 1rem; color: #ff4d8d;"></i>
-                <p>Your Photo Will Appear Here</p>
-                <p>Upload a photo using the button below</p>
-            </div>
-            <img id="photo1" class="page-photo" style="display: none;" alt="Your romantic photo">
-        </div>
-        
-        <div class="file-input-container">
-            <label for="photo1-upload"><i class="fas fa-camera"></i> Upload Photo for Page 1</label>
-            <input type="file" id="photo1-upload" class="file-input" accept="image/*">
+            <!-- REPLACE THIS IMAGE URL WITH YOUR OWN PHOTO -->
+            <!-- Change the src attribute to point to your image file -->
+            <img src="2.jpg" alt="Our special moment" class="page-photo" id="photo1">
         </div>
         
         <div class="question">
@@ -513,8 +500,22 @@
             Yes, My Heart Chooses You <i class="fas fa-heart" style="margin-left: 10px;"></i>
         </button>
         
-        <div class="instruction">
-            <p><i class="fas fa-music"></i> <strong>Music Setup:</strong> Upload your background music for Page 1 using the audio controls in the bottom right corner.</p>
+        <div class="instruction-box">
+            <h3><i class="fas fa-camera"></i> How to Add Your Photos</h3>
+            <p>To add your own photos:</p>
+            <ol>
+                <li>Save your photos in the same folder as this HTML file</li>
+                <li>Rename them to: <strong>photo1.jpg</strong>, <strong>photo2.jpg</strong>, <strong>photo3.jpg</strong></li>
+                <li>OR change the image URLs in the code below:</li>
+            </ol>
+            <div class="code-instruction">
+                &lt;!-- On Page 1 --&gt;<br>
+                &lt;img src="<strong>YOUR_PHOTO_1.jpg</strong>" ...&gt;<br><br>
+                &lt;!-- On Page 2 --&gt;<br>
+                &lt;img src="<strong>YOUR_PHOTO_2.jpg</strong>" ...&gt;<br><br>
+                &lt;!-- On Page 3 --&gt;<br>
+                &lt;img src="<strong>YOUR_PHOTO_3.jpg</strong>" ...&gt;
+            </div>
         </div>
     </div>
     
@@ -523,18 +524,9 @@
         <h1>Every Moment With You</h1>
         
         <div class="photo-container">
-            <!-- You can replace this with your own photo -->
-            <div class="photo-placeholder" id="photo2-placeholder">
-                <i class="fas fa-image" style="font-size: 4rem; margin-bottom: 1rem; color: #ff4d8d;"></i>
-                <p>Your Photo Will Appear Here</p>
-                <p>Upload a photo using the button below</p>
-            </div>
-            <img id="photo2" class="page-photo" style="display: none;" alt="Your romantic photo">
-        </div>
-        
-        <div class="file-input-container">
-            <label for="photo2-upload"><i class="fas fa-camera"></i> Upload Photo for Page 2</label>
-            <input type="file" id="photo2-upload" class="file-input" accept="image/*">
+            <!-- REPLACE THIS IMAGE URL WITH YOUR OWN PHOTO -->
+            <!-- Change the src attribute to point to your image file -->
+            <img src="3.jpg" alt="Our beautiful memories" class="page-photo" id="photo2">
         </div>
         
         <div class="question">
@@ -551,22 +543,13 @@
         <h1>My Love Letter to You</h1>
         
         <div class="photo-container">
-            <!-- You can replace this with your own photo -->
-            <div class="photo-placeholder" id="photo3-placeholder">
-                <i class="fas fa-heart" style="font-size: 4rem; margin-bottom: 1rem; color: #ff4d8d;"></i>
-                <p>Your Photo Will Appear Here</p>
-                <p>Upload a photo using the button below</p>
-            </div>
-            <img id="photo3" class="page-photo" style="display: none;" alt="Your romantic photo">
+            <!-- REPLACE THIS IMAGE URL WITH YOUR OWN PHOTO -->
+            <!-- Change the src attribute to point to your image file -->
+            <img src="1.jpg" alt="Our love story" class="page-photo" id="photo3">
         </div>
         
         <!-- Heart shapes that float up -->
         <div class="heart-shapes" id="heartContainer"></div>
-        
-        <div class="file-input-container">
-            <label for="photo3-upload"><i class="fas fa-camera"></i> Upload Photo for Page 3</label>
-            <input type="file" id="photo3-upload" class="file-input" accept="image/*">
-        </div>
         
         <div class="letter-container">
             <p>My Dearest Love,</p>
@@ -592,6 +575,18 @@
         <div class="thank-you">
             Thank you for loving me, supporting me, being beside me always
         </div>
+        
+        <div class="music-upload-container">
+            <h3><i class="fas fa-music"></i> How to Add Your Music</h3>
+            <p>Upload your own music files:</p>
+            <label for="musicUpload"><i class="fas fa-upload"></i> Upload Romantic Music (for Pages 1 & 2)</label>
+            <input type="file" id="musicUpload" class="file-input" accept="audio/*">
+            
+            <label for="fireworksMusicUpload" style="margin-top: 15px; display: block;">
+                <i class="fas fa-fire"></i> Upload Fireworks Sound (for Page 3)
+            </label>
+            <input type="file" id="fireworksMusicUpload" class="file-input" accept="audio/*">
+        </div>
     </div>
     
     <!-- Fireworks container -->
@@ -608,18 +603,6 @@
         <button id="replayButton" title="Restart Music">
             <i class="fas fa-redo"></i>
         </button>
-        <div style="margin-left: 10px;">
-            <label for="musicUpload" title="Upload Your Music" style="cursor: pointer;">
-                <i class="fas fa-upload" style="color: #7c193c; font-size: 1.5rem;"></i>
-            </label>
-            <input type="file" id="musicUpload" accept="audio/*" style="display: none;">
-        </div>
-        <div style="margin-left: 5px;">
-            <label for="fireworksMusicUpload" title="Upload Fireworks Sound" style="cursor: pointer;">
-                <i class="fas fa-fire" style="color: #7c193c; font-size: 1.5rem;"></i>
-            </label>
-            <input type="file" id="fireworksMusicUpload" accept="audio/*" style="display: none;">
-        </div>
     </div>
     
     <!-- Page counter -->
@@ -627,17 +610,19 @@
         Page <span id="currentPage">1</span> of 3
     </div>
     
-    <!-- Background music -->
+    <!-- Background music (you can replace the src with your music file) -->
     <audio id="bgMusic" loop>
-        <!-- Default music - replace with your own -->
-        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-sunset-687.mp3" type="audio/mpeg">
+        <!-- REPLACE THIS WITH YOUR MUSIC FILE -->
+        <!-- Change the src attribute to point to your music file -->
+        <source src="love.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     
-    <!-- Fireworks sound for page 3 -->
+    <!-- Fireworks sound for page 3 (you can replace the src with your fireworks sound) -->
     <audio id="fireworksSound" loop>
-        <!-- Default fireworks sound - replace with your own -->
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-fireworks-show-audio-3061.mp3" type="audio/mpeg">
+        <!-- REPLACE THIS WITH YOUR FIREWORKS SOUND FILE -->
+        <!-- Change the src attribute to point to your fireworks sound file -->
+        <source src="fireworks.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     
@@ -666,16 +651,16 @@
                 initFireworks();
                 // Switch to fireworks sound
                 document.getElementById('bgMusic').pause();
-                // Try to play fireworks sound, but don't show error if autoplay is blocked
+                // Try to play fireworks sound
                 document.getElementById('fireworksSound').play().catch(e => {
-                    console.log("Fireworks sound autoplay prevented. User interaction required.");
+                    console.log("Fireworks sound autoplay prevented.");
                 });
             } else if (pageNumber === 1 || pageNumber === 2) {
                 // Switch back to romantic music
                 document.getElementById('fireworksSound').pause();
                 // Try to play romantic music
                 document.getElementById('bgMusic').play().catch(e => {
-                    console.log("Music autoplay prevented. User interaction required.");
+                    console.log("Music autoplay prevented.");
                 });
             }
         }
@@ -711,16 +696,16 @@
             
             // Create different types of fireworks
             const fireworkTypes = [
-                {color: '#ff4d8d', shape: 'heart', name: 'heartExplode'}, // Pink hearts
-                {color: '#ffb3d1', shape: 'heart', name: 'heartExplode'}, // Light pink hearts
-                {color: '#ff9ebb', shape: 'circle', name: 'circleExplode'}, // Medium pink circles
-                {color: '#ff6b9d', shape: 'ring', name: 'ringExplode'}, // Dark pink rings
-                {color: '#ffd1dc', shape: 'star', name: 'starExplode'}, // Very light pink stars
-                {color: '#ff85b1', shape: 'circle', name: 'circleExplode'}, // Light medium pink circles
-                {color: '#e11d48', shape: 'heart', name: 'heartExplode'}, // Red hearts
-                {color: '#be185d', shape: 'ring', name: 'ringExplode'}, // Dark red rings
-                {color: '#9d174d', shape: 'star', name: 'starExplode'}, // Dark pink stars
-                {color: '#ffffff', shape: 'circle', name: 'circleExplode'} // White circles for contrast
+                {color: '#ff4d8d', shape: 'heart', name: 'heartExplode'},
+                {color: '#ffb3d1', shape: 'heart', name: 'heartExplode'},
+                {color: '#ff9ebb', shape: 'circle', name: 'circleExplode'},
+                {color: '#ff6b9d', shape: 'ring', name: 'ringExplode'},
+                {color: '#ffd1dc', shape: 'star', name: 'starExplode'},
+                {color: '#ff85b1', shape: 'circle', name: 'circleExplode'},
+                {color: '#e11d48', shape: 'heart', name: 'heartExplode'},
+                {color: '#be185d', shape: 'ring', name: 'ringExplode'},
+                {color: '#9d174d', shape: 'star', name: 'starExplode'},
+                {color: '#ffffff', shape: 'circle', name: 'circleExplode'}
             ];
             
             // Create initial fireworks
@@ -819,9 +804,9 @@
             fireworksSound.currentTime = 0;
             
             if (currentPage === 3) {
-                fireworksSound.play().catch(e => console.log("Could not restart fireworks sound:", e));
+                fireworksSound.play().catch(e => console.log("Could not restart fireworks sound"));
             } else {
-                bgMusic.play().catch(e => console.log("Could not restart music:", e));
+                bgMusic.play().catch(e => console.log("Could not restart music"));
             }
         });
         
@@ -839,7 +824,7 @@
                 // Try to play if we're on page 1 or 2
                 if (currentPage === 1 || currentPage === 2) {
                     bgMusic.play().catch(e => {
-                        console.log("Music autoplay prevented. Click the play button or navigate to another page.");
+                        console.log("Music autoplay prevented.");
                     });
                 }
                 
@@ -869,46 +854,12 @@
             }
         });
         
-        // Photo upload functionality
-        document.getElementById('photo1-upload').addEventListener('change', function(e) {
-            handlePhotoUpload(e, 'photo1', 'photo1-placeholder');
-        });
-        
-        document.getElementById('photo2-upload').addEventListener('change', function(e) {
-            handlePhotoUpload(e, 'photo2', 'photo2-placeholder');
-        });
-        
-        document.getElementById('photo3-upload').addEventListener('change', function(e) {
-            handlePhotoUpload(e, 'photo3', 'photo3-placeholder');
-        });
-        
-        function handlePhotoUpload(event, photoId, placeholderId) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    const photoElement = document.getElementById(photoId);
-                    const placeholderElement = document.getElementById(placeholderId);
-                    
-                    // Set the photo source
-                    photoElement.src = e.target.result;
-                    photoElement.style.display = 'block';
-                    
-                    // Hide the placeholder
-                    placeholderElement.style.display = 'none';
-                };
-                
-                reader.readAsDataURL(file);
-            }
-        }
-        
         // Auto-start background music on page load
         window.addEventListener('DOMContentLoaded', function() {
             // Try to play background music
             document.getElementById('bgMusic').volume = 0.5;
             document.getElementById('bgMusic').play().catch(e => {
-                console.log("Autoplay prevented. User interaction required.");
+                console.log("Autoplay prevented. Click anywhere on the page to start music.");
                 // Show a notification for user to interact
                 document.body.addEventListener('click', function initAudio() {
                     document.getElementById('bgMusic').play().catch(e => console.log("Still prevented"));
