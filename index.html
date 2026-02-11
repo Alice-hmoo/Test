@@ -90,6 +90,16 @@
             border: 2px solid rgba(255, 255, 255, 0.4);
         }
         
+        /* Buttons Container */
+        .buttons-container {
+            position: relative;
+            margin-top: 2rem;
+            min-height: 150px;
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        /* Yes Button */
         .yes-button {
             background: linear-gradient(to right, #e11d48, #be123c);
             color: white;
@@ -98,13 +108,13 @@
             font-size: 1.8rem;
             border-radius: 50px;
             cursor: pointer;
-            margin-top: 1rem;
             box-shadow: 0 10px 25px rgba(190, 18, 60, 0.4);
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
             font-weight: 600;
             letter-spacing: 1px;
+            z-index: 3;
         }
         
         .yes-button:hover {
@@ -133,6 +143,43 @@
         
         .yes-button:focus:not(:active)::after {
             animation: ripple 1s ease-out;
+        }
+        
+        /* No Button */
+        .no-button {
+            background: linear-gradient(to right, #6c757d, #495057);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+            transition: all 0.3s;
+            position: absolute;
+            z-index: 2;
+            font-weight: 600;
+        }
+        
+        .no-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(108, 117, 125, 0.6);
+        }
+        
+        /* No button running animation */
+        .no-button.run-away {
+            animation: runAway 0.5s ease-out forwards;
+        }
+        
+        @keyframes runAway {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--move-x), var(--move-y)) scale(0.9);
+                opacity: 1;
+            }
         }
         
         @keyframes ripple {
@@ -433,10 +480,19 @@
                 font-size: 1.6rem;
             }
             
+            .no-button {
+                padding: 0.8rem 2rem;
+                font-size: 1.3rem;
+            }
+            
             .audio-controls {
                 bottom: 10px;
                 right: 10px;
                 padding: 8px 12px;
+            }
+            
+            .buttons-container {
+                min-height: 120px;
             }
         }
         
@@ -484,7 +540,7 @@
 <body>
     <!-- Page 1 -->
     <div class="page active-page fade-in" id="page1">
-        <h1>My Heart Found You</h1>
+        <h1>Hello babe? Finally, you're here. <3 </h1>
         
         <div class="photo-container">
             <!-- REPLACE THIS IMAGE URL WITH YOUR OWN PHOTO -->
@@ -493,35 +549,21 @@
         </div>
         
         <div class="question">
-            From the moment I saw you, my world changed forever. Will you journey with me to the next page of our story?
+            Will you be my Valentine?
         </div>
         
-        <button class="yes-button" onclick="goToPage(2)">
-            Yes, My Heart Chooses You <i class="fas fa-heart" style="margin-left: 10px;"></i>
-        </button>
-        
-        <div class="instruction-box">
-            <h3><i class="fas fa-camera"></i> How to Add Your Photos</h3>
-            <p>To add your own photos:</p>
-            <ol>
-                <li>Save your photos in the same folder as this HTML file</li>
-                <li>Rename them to: <strong>photo1.jpg</strong>, <strong>photo2.jpg</strong>, <strong>photo3.jpg</strong></li>
-                <li>OR change the image URLs in the code below:</li>
-            </ol>
-            <div class="code-instruction">
-                &lt;!-- On Page 1 --&gt;<br>
-                &lt;img src="<strong>YOUR_PHOTO_1.jpg</strong>" ...&gt;<br><br>
-                &lt;!-- On Page 2 --&gt;<br>
-                &lt;img src="<strong>YOUR_PHOTO_2.jpg</strong>" ...&gt;<br><br>
-                &lt;!-- On Page 3 --&gt;<br>
-                &lt;img src="<strong>YOUR_PHOTO_3.jpg</strong>" ...&gt;
-            </div>
+        <div class="buttons-container">
+            <button class="yes-button" onclick="goToPage(2)">
+                Yes <i class="fas fa-heart" style="margin-left: 10px;"></i>
+            </button>
+            <button class="no-button" id="noButton1">No</button>
         </div>
+        
     </div>
     
     <!-- Page 2 -->
     <div class="page fade-in" id="page2">
-        <h1>Every Moment With You</h1>
+        <h1>Babe...This is our 2nd Valentine's Day together.</h1>
         
         <div class="photo-container">
             <!-- REPLACE THIS IMAGE URL WITH YOUR OWN PHOTO -->
@@ -530,12 +572,15 @@
         </div>
         
         <div class="question">
-            With each passing day, my love for you grows stronger. Will you continue to the final page where my heart speaks?
+            With each passing day, my love for you grows stronger. Can you feel it?
         </div>
         
-        <button class="yes-button" onclick="goToPage(3)">
-            Yes, I Want to Hear Your Heart <i class="fas fa-heartbeat" style="margin-left: 10px;"></i>
-        </button>
+        <div class="buttons-container">
+            <button class="yes-button" onclick="goToPage(3)">
+                Yes <i class="fas fa-heartbeat" style="margin-left: 10px;"></i>
+            </button>
+            <button class="no-button" id="noButton2">No</button>
+        </div>
     </div>
     
     <!-- Page 3 -->
@@ -552,19 +597,16 @@
         <div class="heart-shapes" id="heartContainer"></div>
         
         <div class="letter-container">
-            <p>My Dearest Love,</p>
+            <p>My Love,</p>
             
-            <p>From the moment our paths crossed, I knew my life would never be the same. You came into my world like a gentle breeze on a warm summer day, refreshing my soul and awakening parts of me I never knew existed.</p>
+            <p>From the moment we met, my life felt different. You came into it so gently, and now I can't imagine my days without you.</p>
             
-            <p>I love the way your eyes light up when you talk about things you're passionate about. I love the sound of your laughter, which has become my favorite melody. I love the way you make ordinary moments feel extraordinary just by being there.</p>
+            <p>I love your smile, your laughter, and the way you make even simple moments feel special.</p>
             
-            <p>With you, I've discovered a love so deep it sometimes takes my breath away. It's in the quiet moments we share, the comfort of your presence, and the way you understand me without words. You've seen me at my best and my worst, and yet you choose to stay, to love me through it all.</p>
+            <p>Being with you feels easy and real. You understand me, support me, and stay by my side no matter what.</p>
+            <p>I'm so thankful for you. Whatever the future brings, I want to face it with you.</p>
             
-            <p>You are my safe harbor in life's storms, my sunshine on cloudy days, and the missing piece I never knew I was searching for. Every day with you is a gift I cherish, and every night dreaming of you is a blessing.</p>
-            
-            <p>No matter what the future holds, I want to face it with you by my side. Through joy and sorrow, through laughter and tears, I choose you today, tomorrow, and forever.</p>
-            
-            <p>You have my heart completely, unconditionally, and eternally.</p>
+            <p>You have my heart, always.I love you.❤️</p>
             
             <div class="signature">
                 With all my love, forever yours<br>
@@ -573,7 +615,7 @@
         </div>
         
         <div class="thank-you">
-            Thank you for loving me, supporting me, being beside me always
+            Happy Valentine's Day, Babe! Thank you for being beside me always.<3
         </div>
         
         <div class="music-upload-container">
@@ -662,7 +704,84 @@
                 document.getElementById('bgMusic').play().catch(e => {
                     console.log("Music autoplay prevented.");
                 });
+                // Initialize running no button for pages 1 and 2
+                initRunningNoButton(pageNumber);
             }
+        }
+        
+        // Initialize running "No" button for pages 1 and 2
+        function initRunningNoButton(pageNumber) {
+            const noButton = document.getElementById(`noButton${pageNumber}`);
+            const container = noButton.parentElement;
+            
+            // Set initial position
+            const initialPositions = [
+                {left: '60%', top: '50%'},
+                {left: '30%', top: '30%'},
+                {left: '70%', top: '70%'},
+                {left: '40%', top: '60%'}
+            ];
+            
+            const randomPos = initialPositions[Math.floor(Math.random() * initialPositions.length)];
+            noButton.style.left = randomPos.left;
+            noButton.style.top = randomPos.top;
+            
+            // Add hover event to make button run away
+            noButton.addEventListener('mouseover', function(e) {
+                makeButtonRunAway(noButton, container);
+            });
+            
+            noButton.addEventListener('touchstart', function(e) {
+                makeButtonRunAway(noButton, container);
+                e.preventDefault();
+            });
+            
+            // Add click event that also makes it run away
+            noButton.addEventListener('click', function(e) {
+                makeButtonRunAway(noButton, container);
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Play a cute sound or do something fun
+                console.log("Nice try! But you can only choose Yes! ❤️");
+            });
+        }
+        
+        // Function to make button run away
+        function makeButtonRunAway(button, container) {
+            // Remove any existing animation
+            button.classList.remove('run-away');
+            
+            // Calculate container dimensions
+            const containerRect = container.getBoundingClientRect();
+            const buttonRect = button.getBoundingClientRect();
+            
+            // Calculate new position that keeps button within container
+            const maxX = containerRect.width - buttonRect.width;
+            const maxY = containerRect.height - buttonRect.height;
+            
+            // Generate random position
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+            
+            // Calculate how far to move
+            const currentX = parseFloat(button.style.left) || 50;
+            const currentY = parseFloat(button.style.top) || 50;
+            
+            // Set CSS variables for animation
+            button.style.setProperty('--move-x', `${newX - currentX}px`);
+            button.style.setProperty('--move-y', `${newY - currentY}px`);
+            
+            // Apply animation
+            void button.offsetWidth; // Trigger reflow
+            button.classList.add('run-away');
+            
+            // Update position after animation
+            setTimeout(() => {
+                button.style.left = `${newX}px`;
+                button.style.top = `${newY}px`;
+                button.classList.remove('run-away');
+            }, 500);
         }
         
         // Initialize hearts for page 3
@@ -872,6 +991,9 @@
             
             // Initialize page counter
             document.getElementById('currentPage').textContent = currentPage;
+            
+            // Initialize running no button for page 1
+            initRunningNoButton(1);
         });
     </script>
 </body>
