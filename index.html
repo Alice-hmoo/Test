@@ -94,36 +94,39 @@
         .buttons-container {
             position: relative;
             margin-top: 2rem;
-            min-height: 200px;
+            min-height: 180px;
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         
-        /* Yes Button */
+        /* Yes Button - SMALLER and PINKER */
         .yes-button {
-            background: linear-gradient(to right, #e11d48, #be123c);
+            background: linear-gradient(to right, #ff69b4, #ff1493);
             color: white;
             border: none;
-            padding: 1.3rem 3.5rem;
-            font-size: 1.8rem;
+            padding: 1rem 2.5rem;
+            font-size: 1.6rem;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 10px 25px rgba(190, 18, 60, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.4);
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
             font-weight: 600;
             letter-spacing: 1px;
             z-index: 3;
+            /* Smaller size */
+            width: auto;
+            min-width: 140px;
         }
         
         .yes-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(190, 18, 60, 0.6);
-            background: linear-gradient(to right, #f43f5e, #e11d48);
+            box-shadow: 0 15px 30px rgba(255, 20, 147, 0.6);
+            background: linear-gradient(to right, #ff85c1, #ff69b4);
         }
         
         .yes-button:active {
@@ -153,8 +156,8 @@
             background: linear-gradient(to right, #6c757d, #495057);
             color: white;
             border: none;
-            padding: 1rem 2.5rem;
-            font-size: 1.5rem;
+            padding: 0.8rem 2rem;
+            font-size: 1.3rem;
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
@@ -162,7 +165,9 @@
             position: absolute;
             z-index: 2;
             font-weight: 600;
-            /* Initial position will be set by JavaScript */
+            /* Smaller to match Yes button */
+            width: auto;
+            min-width: 100px;
         }
         
         .no-button:hover {
@@ -170,9 +175,9 @@
             box-shadow: 0 8px 20px rgba(108, 117, 125, 0.6);
         }
         
-        /* No button rotating animation */
+        /* No button rotating animation - SMALLER RADIUS */
         .no-button.rotate-around {
-            animation: rotateAround 20s linear infinite;
+            animation: rotateAround 15s linear infinite;
         }
         
         /* No button moving to opposite side animation */
@@ -182,10 +187,10 @@
         
         @keyframes rotateAround {
             0% {
-                transform: rotate(0deg) translateX(150px) rotate(0deg);
+                transform: rotate(0deg) translateX(100px) rotate(0deg);
             }
             100% {
-                transform: rotate(360deg) translateX(150px) rotate(-360deg);
+                transform: rotate(360deg) translateX(100px) rotate(-360deg);
             }
         }
         
@@ -492,13 +497,15 @@
             }
             
             .yes-button {
-                padding: 1rem 2.5rem;
-                font-size: 1.6rem;
+                padding: 0.9rem 2rem;
+                font-size: 1.4rem;
+                min-width: 120px;
             }
             
             .no-button {
-                padding: 0.8rem 2rem;
-                font-size: 1.3rem;
+                padding: 0.7rem 1.7rem;
+                font-size: 1.1rem;
+                min-width: 90px;
             }
             
             .audio-controls {
@@ -508,15 +515,16 @@
             }
             
             .buttons-container {
-                min-height: 180px;
+                min-height: 160px;
+                max-width: 400px;
             }
             
             @keyframes rotateAround {
                 0% {
-                    transform: rotate(0deg) translateX(120px) rotate(0deg);
+                    transform: rotate(0deg) translateX(80px) rotate(0deg);
                 }
                 100% {
-                    transform: rotate(360deg) translateX(120px) rotate(-360deg);
+                    transform: rotate(360deg) translateX(80px) rotate(-360deg);
                 }
             }
         }
@@ -568,8 +576,6 @@
         <h1>Hello babe? Finally, you're here. <3 </h1>
         
         <div class="photo-container">
-            <!-- REPLACE THIS IMAGE URL WITH YOUR OWN PHOTO -->
-            <!-- Change the src attribute to point to your image file -->
             <img src="2.jpg" alt="Our special moment" class="page-photo" id="photo1">
         </div>
         
@@ -591,8 +597,6 @@
         <h1>Babe...This is our 2nd Valentine's Day together.</h1>
         
         <div class="photo-container">
-            <!-- REPLACE THIS IMAGE URL WITH YOUR OWN PHOTO -->
-            <!-- Change the src attribute to point to your image file -->
             <img src="3.jpg" alt="Our beautiful memories" class="page-photo" id="photo2">
         </div>
         
@@ -613,8 +617,6 @@
         <h1>My Love Letter to You</h1>
         
         <div class="photo-container">
-            <!-- REPLACE THIS IMAGE URL WITH YOUR OWN PHOTO -->
-            <!-- Change the src attribute to point to your image file -->
             <img src="1.jpg" alt="Our love story" class="page-photo" id="photo3">
         </div>
         
@@ -679,16 +681,12 @@
     
     <!-- Background music (you can replace the src with your music file) -->
     <audio id="bgMusic" loop>
-        <!-- REPLACE THIS WITH YOUR MUSIC FILE -->
-        <!-- Change the src attribute to point to your music file -->
         <source src="love.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     
     <!-- Fireworks sound for page 3 (you can replace the src with your fireworks sound) -->
     <audio id="fireworksSound" loop>
-        <!-- REPLACE THIS WITH YOUR FIREWORKS SOUND FILE -->
-        <!-- Change the src attribute to point to your fireworks sound file -->
         <source src="fireworks.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -753,7 +751,7 @@
             // Position no button at the starting point of the rotation
             noButton.style.left = `${centerX}px`;
             noButton.style.top = `${centerY}px`;
-            noButton.style.transformOrigin = `-150px 0`; // Adjust based on rotation radius
+            noButton.style.transformOrigin = `-100px 0`; // Smaller radius (100px instead of 150px)
             
             // Add click event that makes it jump to opposite side
             noButton.addEventListener('click', function(e) {
@@ -770,7 +768,7 @@
                 
                 // Move to opposite side (180 degrees)
                 const oppositeAngle = currentAngle + 180;
-                const radius = 150; // Same as in CSS animation
+                const radius = 100; // SMALLER RADIUS (100px instead of 150px)
                 
                 const currentX = Math.cos(currentAngle * Math.PI / 180) * radius;
                 const currentY = Math.sin(currentAngle * Math.PI / 180) * radius;
@@ -799,11 +797,11 @@
             
             // Add hover event that speeds up rotation
             noButton.addEventListener('mouseover', function() {
-                noButton.style.animationDuration = '5s';
+                noButton.style.animationDuration = '4s'; // Faster when hovered
             });
             
             noButton.addEventListener('mouseout', function() {
-                noButton.style.animationDuration = '20s';
+                noButton.style.animationDuration = '15s'; // Slower normal speed
             });
         }
         
