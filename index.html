@@ -94,9 +94,12 @@
         .buttons-container {
             position: relative;
             margin-top: 2rem;
-            min-height: 150px;
+            min-height: 200px;
             width: 100%;
             max-width: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         /* Yes Button */
@@ -159,6 +162,7 @@
             position: absolute;
             z-index: 2;
             font-weight: 600;
+            /* Initial position will be set by JavaScript */
         }
         
         .no-button:hover {
@@ -166,19 +170,31 @@
             box-shadow: 0 8px 20px rgba(108, 117, 125, 0.6);
         }
         
-        /* No button running animation */
-        .no-button.run-away {
-            animation: runAway 0.5s ease-out forwards;
+        /* No button rotating animation */
+        .no-button.rotate-around {
+            animation: rotateAround 20s linear infinite;
         }
         
-        @keyframes runAway {
+        /* No button moving to opposite side animation */
+        .no-button.move-to-opposite {
+            animation: moveToOpposite 0.8s ease-out forwards;
+        }
+        
+        @keyframes rotateAround {
             0% {
-                transform: translate(0, 0) scale(1);
-                opacity: 1;
+                transform: rotate(0deg) translateX(150px) rotate(0deg);
             }
             100% {
-                transform: translate(var(--move-x), var(--move-y)) scale(0.9);
-                opacity: 1;
+                transform: rotate(360deg) translateX(150px) rotate(-360deg);
+            }
+        }
+        
+        @keyframes moveToOpposite {
+            0% {
+                transform: translate(var(--start-x), var(--start-y));
+            }
+            100% {
+                transform: translate(var(--end-x), var(--end-y));
             }
         }
         
@@ -492,7 +508,16 @@
             }
             
             .buttons-container {
-                min-height: 120px;
+                min-height: 180px;
+            }
+            
+            @keyframes rotateAround {
+                0% {
+                    transform: rotate(0deg) translateX(120px) rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg) translateX(120px) rotate(-360deg);
+                }
             }
         }
         
@@ -556,7 +581,7 @@
             <button class="yes-button" onclick="goToPage(2)">
                 Yes <i class="fas fa-heart" style="margin-left: 10px;"></i>
             </button>
-            <button class="no-button" id="noButton1">No</button>
+            <button class="no-button rotate-around" id="noButton1">No</button>
         </div>
         
     </div>
@@ -579,7 +604,7 @@
             <button class="yes-button" onclick="goToPage(3)">
                 Yes <i class="fas fa-heartbeat" style="margin-left: 10px;"></i>
             </button>
-            <button class="no-button" id="noButton2">No</button>
+            <button class="no-button rotate-around" id="noButton2">No</button>
         </div>
     </div>
     
@@ -704,84 +729,82 @@
                 document.getElementById('bgMusic').play().catch(e => {
                     console.log("Music autoplay prevented.");
                 });
-                // Initialize running no button for pages 1 and 2
-                initRunningNoButton(pageNumber);
+                // Initialize rotating no button for pages 1 and 2
+                initRotatingNoButton(pageNumber);
             }
         }
         
-        // Initialize running "No" button for pages 1 and 2
-        function initRunningNoButton(pageNumber) {
+        // Initialize rotating "No" button for pages 1 and 2
+        function initRotatingNoButton(pageNumber) {
             const noButton = document.getElementById(`noButton${pageNumber}`);
             const container = noButton.parentElement;
+            const yesButton = container.querySelector('.yes-button');
             
-            // Set initial position
-            const initialPositions = [
-                {left: '60%', top: '50%'},
-                {left: '30%', top: '30%'},
-                {left: '70%', top: '70%'},
-                {left: '40%', top: '60%'}
-            ];
+            // Make sure the button has the rotate-around class
+            noButton.classList.add('rotate-around');
             
-            const randomPos = initialPositions[Math.floor(Math.random() * initialPositions.length)];
-            noButton.style.left = randomPos.left;
-            noButton.style.top = randomPos.top;
+            // Calculate center of yes button
+            const containerRect = container.getBoundingClientRect();
+            const yesButtonRect = yesButton.getBoundingClientRect();
             
-            // Add hover event to make button run away
-            noButton.addEventListener('mouseover', function(e) {
-                makeButtonRunAway(noButton, container);
-            });
+            const centerX = yesButtonRect.left + yesButtonRect.width/2 - containerRect.left;
+            const centerY = yesButtonRect.top + yesButtonRect.height/2 - containerRect.top;
             
-            noButton.addEventListener('touchstart', function(e) {
-                makeButtonRunAway(noButton, container);
-                e.preventDefault();
-            });
+            // Position no button at the starting point of the rotation
+            noButton.style.left = `${centerX}px`;
+            noButton.style.top = `${centerY}px`;
+            noButton.style.transformOrigin = `-150px 0`; // Adjust based on rotation radius
             
-            // Add click event that also makes it run away
+            // Add click event that makes it jump to opposite side
             noButton.addEventListener('click', function(e) {
-                makeButtonRunAway(noButton, container);
                 e.preventDefault();
                 e.stopPropagation();
+                
+                // Stop the rotation animation temporarily
+                noButton.classList.remove('rotate-around');
+                
+                // Calculate opposite position
+                const currentTransform = getComputedStyle(noButton).transform;
+                const matrix = new DOMMatrix(currentTransform);
+                const currentAngle = Math.atan2(matrix.b, matrix.a) * (180 / Math.PI);
+                
+                // Move to opposite side (180 degrees)
+                const oppositeAngle = currentAngle + 180;
+                const radius = 150; // Same as in CSS animation
+                
+                const currentX = Math.cos(currentAngle * Math.PI / 180) * radius;
+                const currentY = Math.sin(currentAngle * Math.PI / 180) * radius;
+                
+                const oppositeX = Math.cos(oppositeAngle * Math.PI / 180) * radius;
+                const oppositeY = Math.sin(oppositeAngle * Math.PI / 180) * radius;
+                
+                // Set CSS variables for the move animation
+                noButton.style.setProperty('--start-x', `${currentX}px`);
+                noButton.style.setProperty('--start-y', `${currentY}px`);
+                noButton.style.setProperty('--end-x', `${oppositeX}px`);
+                noButton.style.setProperty('--end-y', `${oppositeY}px`);
+                
+                // Apply the move animation
+                noButton.classList.add('move-to-opposite');
+                
+                // After animation completes, restart rotation
+                setTimeout(() => {
+                    noButton.classList.remove('move-to-opposite');
+                    noButton.classList.add('rotate-around');
+                }, 800);
                 
                 // Play a cute sound or do something fun
                 console.log("Nice try! But you can only choose Yes! ❤️");
             });
-        }
-        
-        // Function to make button run away
-        function makeButtonRunAway(button, container) {
-            // Remove any existing animation
-            button.classList.remove('run-away');
             
-            // Calculate container dimensions
-            const containerRect = container.getBoundingClientRect();
-            const buttonRect = button.getBoundingClientRect();
+            // Add hover event that speeds up rotation
+            noButton.addEventListener('mouseover', function() {
+                noButton.style.animationDuration = '5s';
+            });
             
-            // Calculate new position that keeps button within container
-            const maxX = containerRect.width - buttonRect.width;
-            const maxY = containerRect.height - buttonRect.height;
-            
-            // Generate random position
-            const newX = Math.random() * maxX;
-            const newY = Math.random() * maxY;
-            
-            // Calculate how far to move
-            const currentX = parseFloat(button.style.left) || 50;
-            const currentY = parseFloat(button.style.top) || 50;
-            
-            // Set CSS variables for animation
-            button.style.setProperty('--move-x', `${newX - currentX}px`);
-            button.style.setProperty('--move-y', `${newY - currentY}px`);
-            
-            // Apply animation
-            void button.offsetWidth; // Trigger reflow
-            button.classList.add('run-away');
-            
-            // Update position after animation
-            setTimeout(() => {
-                button.style.left = `${newX}px`;
-                button.style.top = `${newY}px`;
-                button.classList.remove('run-away');
-            }, 500);
+            noButton.addEventListener('mouseout', function() {
+                noButton.style.animationDuration = '20s';
+            });
         }
         
         // Initialize hearts for page 3
@@ -992,8 +1015,8 @@
             // Initialize page counter
             document.getElementById('currentPage').textContent = currentPage;
             
-            // Initialize running no button for page 1
-            initRunningNoButton(1);
+            // Initialize rotating no button for page 1
+            initRotatingNoButton(1);
         });
     </script>
 </body>
